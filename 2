@@ -1,0 +1,46 @@
+#include <iostream>
+#include <functional>
+#include <cmath>
+
+using namespace std;
+
+double calculate(
+    function<double(double, double)> operation,
+    double a,
+    double b)
+{
+    return operation(a, b);
+}
+
+int main()
+{
+
+    cout << calculate(
+        [](double a, double b)
+        {
+            return a + b;
+        },
+        2,
+        3
+    ) << endl;
+
+    cout << calculate(
+        [](double a, double b)
+        {
+            return a * b;
+        },
+        2,
+        3
+    ) << endl;
+
+    cout << calculate(
+        [](double a, double b)
+        {
+            return pow(a, b);
+        },
+        2,
+        3
+    ) << endl;
+
+    return 0;
+}
