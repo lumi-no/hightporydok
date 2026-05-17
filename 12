@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+function<int(int)> composeMany(
+    const vector<function<int(int)>>& funcs)
+{
+    return [funcs](int x)
+    {
+        int result = x;
+
+        for (const auto& func : funcs)
+        {
+            result = func(result);
+        }
+
+        return result;
+    };
+}
+
+int main()
+{
+    function<int(int)> add1 =
+        [](int x)
+        {
+            return x + 1;
+        };
+
+    function<int(int)> multiply2 =
+        [](int x)
+        {
+            return x * 2;
+        };
+
+    function<int(int)> square =
+        [](int x)
+        {
+            return x * x;
+        };
+
+    function<int(int)> composed =
+        composeMany(
+        {
+            add1,
+            multiply2,
+            square
+        });
+
+    cout << composed(3) << endl;
+
+    return 0;
+}
