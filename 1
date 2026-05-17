@@ -1,0 +1,30 @@
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+int apply(function<int(int)> func, int x)
+{
+    return func(x);
+}
+
+int main()
+{
+    cout << apply(
+        [](int x)
+        {
+            return x * 2;
+        },
+        5
+    ) << endl;
+
+    cout << apply(
+        [](int x)
+        {
+            return x + 10;
+        },
+        5
+    ) << endl;
+
+    return 0;
+}
