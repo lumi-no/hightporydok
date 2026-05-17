@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+int reduceCustom(
+    function<int(int, int)> func,
+    const vector<int>& data,
+    int initial)
+{
+    int result = initial;
+
+    for (int x : data)
+    {
+        result = func(result, x);
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> numbers = {1, 2, 3, 4};
+
+    int sum =
+        reduceCustom(
+            [](int a, int b)
+            {
+                return a + b;
+            },
+            numbers,
+            0
+        );
+
+    cout << sum << endl;
+
+    return 0;
+}
