@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<int> filterCustom(
+    function<bool(int)> func,
+    const vector<int>& data)
+{
+    vector<int> result;
+
+    for (int x : data)
+    {
+        if (func(x))
+        {
+            result.push_back(x);
+        }
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> numbers = {1, 2, 3, 4, 5, 6};
+
+    vector<int> result =
+        filterCustom(
+            [](int x)
+            {
+                return x % 2 == 0;
+            },
+            numbers
+        );
+
+    for (int x : result)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
