@@ -1,0 +1,24 @@
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+function<bool(int)> makeFilter(int n)
+{
+    return [n](int x)
+    {
+        return x > n;
+    };
+}
+
+int main()
+{
+    function<bool(int)> greaterThan10 =
+        makeFilter(10);
+
+    cout << greaterThan10(5) << endl;
+
+    cout << greaterThan10(15) << endl;
+
+    return 0;
+}
