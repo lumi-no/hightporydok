@@ -1,0 +1,24 @@
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+function<int(int)> multiplier(int n)
+{
+    return [n](int x)
+    {
+        return x * n;
+    };
+}
+
+int main()
+{
+    function<int(int)> times2 = multiplier(2);
+    function<int(int)> times5 = multiplier(5);
+
+    cout << times2(10) << endl;
+
+    cout << times5(10) << endl;
+
+    return 0;
+}
