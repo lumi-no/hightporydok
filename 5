@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<int> mapCustom(
+    function<int(int)> func,
+    const vector<int>& data)
+{
+    vector<int> result;
+
+    for (int x : data)
+    {
+        result.push_back(func(x));
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> numbers = {1, 2, 3, 4};
+
+    vector<int> result =
+        mapCustom(
+            [](int x)
+            {
+                return x * x;
+            },
+            numbers
+        );
+
+    for (int x : result)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
