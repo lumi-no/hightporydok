@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<int> mapCustom(
+    function<int(int)> func,
+    const vector<int>& data)
+{
+    vector<int> result;
+
+    for (int x : data)
+    {
+        result.push_back(func(x));
+    }
+
+    return result;
+}
+
+int reduceCustom(
+    function<int(int, int)> func,
+    const vector<int>& data,
+    int initial)
+{
+    int result = initial;
+
+    for (int x : data)
+    {
+        result = func(result, x);
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> numbers = {1, 2, 3, 4};
+
+    int result =
+        reduceCustom(
+            [](int acc, int x)
+            {
+                return acc + x;
+            },
+
+            mapCustom(
+                [](int x)
+                {
+                    return x * x;
+                },
+                numbers
+            ),
+
+            0
+        );
+
+    cout << result << endl;
+
+    return 0;
+}
