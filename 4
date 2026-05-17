@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<int> process(
+    const vector<int>& data,
+    function<int(int)> transform,
+    function<bool(int)> predicate)
+{
+    vector<int> result;
+
+    for (int x : data)
+    {
+        if (predicate(x))
+        {
+            result.push_back(transform(x));
+        }
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> data = {1, 2, 3, 4, 5, 6};
+
+    vector<int> result =
+        process(
+            data,
+
+            [](int x)
+            {
+                return x * x;
+            },
+
+            [](int x)
+            {
+                return x % 2 == 0;
+            }
+        );
+
+    for (int x : result)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
